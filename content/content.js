@@ -3,6 +3,7 @@
 const translatedNodes = new WeakMap();
 let isProcessing = false;
 let observer = null;
+let currentFontSize = 12;
 
 function isVisible(elem) {
   if (!elem) return false;
@@ -19,6 +20,19 @@ function isTranslatableText(text) {
   if (/^https?:\/\/\S+$/.test(text.trim())) return false;
   if (/^[\p{Emoji}\s]+$/u.test(text.trim())) return false;
   return true;
+}
+
+function getPageLanguage() {
+  const lang = (document.documentElement.lang || '').toLowerCase();
+  if (lang.startsWith('zh')) return '中文';
+  if (lang.startsWith('en')) return 'English';
+  if (lang.startsWith('ja')) return '日本語';
+  if (lang.startsWith('ko')) return '한국어';
+  if (lang.startsWith('fr')) return 'Français';
+  if (lang.startsWith('de')) return 'Deutsch';
+  if (lang.startsWith('es')) return 'Español';
+  if (lang.startsWith('ru')) return 'Русский';
+  return null;
 }
 
 function shouldSkipElement(elem) {
@@ -71,6 +85,7 @@ function insertTranslation(textNode, translatedText) {
   const span = document.createElement('span');
   span.className = 'tp-translation';
   span.setAttribute('data-tp-extension', 'true');
+  span.style.fontSize = currentFontSize + 'px';
   span.textContent = translatedText;
 
   if (textNode.nextSibling) {
@@ -91,6 +106,11 @@ async function translateNodes(nodes) {
 
   if (!settings.enabled) return;
   if (nodes.length === 0) return;
+
+  // 页面语言与目标语言相同则跳过
+  if (settings.sourceLang !== 'auto' && settings.sourceLang === settings.targetLang) return;
+  var pageLang = getPageLanguage();
+  if (pageLang && pageLang === settings.targetLang) return;
 
   const texts = nodes.map(function (n) { return n.textContent.trim(); });
 
@@ -249,7 +269,8 @@ function setupSelectionTranslation() {
 }
 
 async function init() {
-  var data = await chrome.storage.local.get('enabled');
+  var data = await chrome.storage.local.get(['enabled', 'fontSize']);
+  if (data.fontSize) currentFontSize = data.fontSize;
   if (data.enabled) {
     await translatePage();
   }
@@ -268,6 +289,13 @@ chrome.storage.onChanged.addListener(function (changes) {
   if (changes.targetLang || changes.sourceLang || changes._retranslate) {
     clearTranslations();
     translatePage();
+  }
+  if (changes.fontSize) {
+    currentFontSize = changes.fontSize.newValue;
+    var els = document.querySelectorAll('.tp-translation');
+    for (var i = 0; i < els.length; i++) {
+      els[i].style.fontSize = currentFontSize + 'px';
+    }
   }
 });
 

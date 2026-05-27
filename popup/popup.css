@@ -97,6 +97,33 @@ details.section summary {
   text-align: center;
 }
 
+.section input[type="range"] {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #d1d5db;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.section input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2563eb;
+  cursor: pointer;
+}
+
+#fontSizeVal {
+  float: right;
+  color: #2563eb;
+  font-weight: 500;
+}
+
 .version {
   margin-top: 10px;
   text-align: center;

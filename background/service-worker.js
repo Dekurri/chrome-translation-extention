@@ -4,6 +4,7 @@ const defaults = {
   enabled: true,
   sourceLang: 'auto',
   targetLang: '中文',
+  fontSize: 12,
   apiKey: '',
   apiEndpoint: 'https://api.deepseek.com/v1/chat/completions',
   model: 'deepseek-chat'

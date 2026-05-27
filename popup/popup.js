@@ -4,6 +4,7 @@ const defaults = {
   enabled: true,
   sourceLang: 'auto',
   targetLang: '中文',
+  fontSize: 12,
   apiKey: '',
   apiEndpoint: 'https://api.deepseek.com/v1/chat/completions',
   model: 'deepseek-chat'
@@ -14,6 +15,8 @@ async function loadSettings() {
   document.getElementById('toggleEnabled').checked = data.enabled;
   document.getElementById('sourceLang').value = data.sourceLang;
   document.getElementById('targetLang').value = data.targetLang;
+  document.getElementById('fontSize').value = data.fontSize;
+  document.getElementById('fontSizeVal').textContent = data.fontSize + 'px';
   document.getElementById('apiKey').value = data.apiKey;
   document.getElementById('apiEndpoint').value = data.apiEndpoint;
   document.getElementById('model').value = data.model;
@@ -46,6 +49,13 @@ function bindEvents() {
 
   document.getElementById('model').addEventListener('change', async (e) => {
     await saveSetting('model', e.target.value);
+  });
+
+  document.getElementById('fontSize').addEventListener('input', (e) => {
+    document.getElementById('fontSizeVal').textContent = e.target.value + 'px';
+  });
+  document.getElementById('fontSize').addEventListener('change', async (e) => {
+    await saveSetting('fontSize', Number(e.target.value));
   });
 
   // 语言设置变更时触发重新翻译
