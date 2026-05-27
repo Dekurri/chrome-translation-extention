@@ -55,7 +55,7 @@ Chrome/Edge 浏览器扩展，使用 DeepSeek API 将页面内容翻译为任意
 
 ## 安装
 
-1.下载release内zip压缩包
+1. 下载release内zip压缩包
 2. 打开 `chrome://extensions/`（Edge: `edge://extensions/`）
 3. 开启右上角「**开发者模式**」
 4. 拖入zip文件
