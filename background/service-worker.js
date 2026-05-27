@@ -46,7 +46,11 @@ async function translateTexts(texts, targetLang, sourceLang) {
 
   const prompt = buildPrompt(texts, targetLang, sourceLang);
 
-  const response = await fetch(settings.apiEndpoint, {
+  let url = settings.apiEndpoint;
+  if (!url.includes('//')) url = 'https://api.deepseek.com/chat/completions';
+  if (!/\/chat\/completions$/.test(url)) url = url.replace(/\/+$/, '') + '/chat/completions';
+
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
