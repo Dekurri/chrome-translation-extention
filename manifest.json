@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "AI 页面翻译",
+  "version": "1.0.0",
+  "description": "使用 AI 翻译页面内容，翻译结果显示在原文下方",
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "AI 翻译"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  }
+}
