@@ -96,3 +96,10 @@ details.section summary {
   color: #1e40af;
   text-align: center;
 }
+
+.version {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+}

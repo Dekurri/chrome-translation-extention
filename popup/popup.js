@@ -62,4 +62,5 @@ function bindEvents() {
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   bindEvents();
+  document.getElementById('version').textContent = 'v' + chrome.runtime.getManifest().version;
 });
