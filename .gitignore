@@ -19,6 +19,8 @@ CLAUDE.md
 
 # ── 安装的外部 skill ──
 .agents/
+skills-lock.json
+plans/
 
 # ── 运行时 & 依赖 ──
 node_modules/
