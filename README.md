@@ -82,12 +82,6 @@ Chrome/Edge 浏览器扩展，使用 DeepSeek API 将页面内容翻译为任意
 - 翻译请求直接从浏览器发送至配置的 API Endpoint
 - 插件不收集任何用户数据或浏览记录
 
-## 打包分发
-
-```bash
-# 排除开发文件后打包
-zip -r ai-translate.zip . -x ".git/*" ".agents/*" "skills-lock.json" ".gitignore"
-```
 
 ## 许可
 
