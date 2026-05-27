@@ -6,8 +6,8 @@ const defaults = {
   targetLang: '中文',
   fontSize: 12,
   apiKey: '',
-  apiEndpoint: 'https://api.deepseek.com/v1/chat/completions',
-  model: 'deepseek-chat'
+  apiEndpoint: 'https://api.deepseek.com/chat/completions',
+  model: 'deepseek-v4-flash'
 };
 
 async function loadSettings() {
